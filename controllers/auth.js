@@ -51,6 +51,40 @@ router.put('/games', (req, res) => {
 
 })
 
+router.put('/gamesRemove', (req, res) => {
+  console.log(req.body)
+  // Look up the user by their email
+  db.User.findOne({ email: req.body.email })
+  .then(user => {
+    console.log(req.body.gameId)
+    for(let i = 0; i < user.games.length; i++) {
+      if (user.games[i] === req.body.gameId) {
+        user.games.splice(i ,1)
+      }
+    }
+   user.save()
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
+
+router.get('/userGames/:id', (req, res) => {
+  console.log()
+  // Look up the user by their email
+  db.User.findOne({username: req.params.id})
+  .then(user => {
+     console.log(user)
+     res.send(user.games)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+
+
 
 
 // POST to /auth/signup (create user; generate token)
@@ -84,7 +118,6 @@ router.post('/signup', (req, res) => {
       else {
         console.log('Error', err)
         res.status(500).send({ message: 'Error creating user' })
-        
       }
     })
   })
