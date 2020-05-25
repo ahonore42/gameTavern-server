@@ -4,55 +4,43 @@ let mongoose = require('mongoose')
 // Create user schema
 let tagsSchema = new mongoose.Schema({
     steamId: {
-        type: String,
-        unique: true
+        type: String
     },
     originId: {
-        type: String,
-        unique: true
+        type: String
     },
     battleNetId: {
-        type: String,
-        unique: true
+        type: String
     },
     epicGamesId: {
-        type: String,
-        unique: true
+        type: String
     },
     xboxGamerTag: {
-        type: String,
-        unique: true
+        type: String
     },
     psnId: {
-        type: String,
-        unique: true
+        type: String
     },
     nintendoFriendCode: {
-        type: String,
-        unique: true
+        type: String
     }
 })
 
 let creatorSchema = new mongoose.Schema({
     youTube: {
-        type: String,
-        unique: true
+        type: String
     },
     twitch: {
-        type: String,
-        unique: true
+        type: String
     },
     mixer: {
-        type: String,
-        unique: true
+        type: String
     },
     twitter: {
-        type: String,
-        unique: true
+        type: String
     },
     instagram: {
-        type: String,
-        unique: true
+        type: String
     }
 })
 
