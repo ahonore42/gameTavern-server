@@ -36,13 +36,13 @@ router.post('/login', (req, res) => {
 
 })
 
-router.put('/games', (req, res) => {
+router.put('/gamesAdd', (req, res) => {
   console.log(req.body)
   // Look up the user by their email
   db.User.findOne({ email: req.body.email })
   .then(user => {
-    console.log(req.body.gameId)
-   user.games.push(req.body.gameId)
+    console.log(req.body.name)
+   user.games.push(req.body.name)
    user.save()
   })
   .catch(err => {
@@ -86,7 +86,7 @@ router.put('/gamesRemove', (req, res) => {
   .then(user => {
     console.log(req.body.gameId)
     for(let i = 0; i < user.games.length; i++) {
-      if (user.games[i] === req.body.gameId) {
+      if (user.games[i] === req.body.name) {
         user.games.splice(i ,1)
       }
     }
@@ -117,6 +117,20 @@ router.get('/userFriends/:id', (req, res) => {
   .then(user => {
      console.log(user.friends)
      res.send(user.friends)
+     
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.get('/userView/:id', (req, res) => {
+  console.log()
+  // Look up the user by their email
+  db.User.findOne({username: req.params.id})
+  .then(user => {
+     console.log(user)
+     res.send(user)
      
   })
   .catch(err => {
