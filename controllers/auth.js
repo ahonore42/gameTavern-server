@@ -51,6 +51,34 @@ router.put('/games', (req, res) => {
 
 })
 
+router.get('/allUsers', (req, res) => {
+  console.log('get users')
+  // Look up the user by their email
+  db.User.find({})
+  .then(users => {
+     console.log(users)
+     res.send(users)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.put('/friendAdd', (req, res) => {
+  console.log(req.body)
+  // Look up the user by their email
+  db.User.findOne({ email: req.body.email })
+  .then(user => {
+  console.log(req.body.friendName)
+   user.friends.push(req.body.friendName)
+   user.save()
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
+
 router.put('/gamesRemove', (req, res) => {
   console.log(req.body)
   // Look up the user by their email
@@ -71,12 +99,25 @@ router.put('/gamesRemove', (req, res) => {
 })
 
 router.get('/userGames/:id', (req, res) => {
-  console.log()
   // Look up the user by their email
   db.User.findOne({username: req.params.id})
   .then(user => {
      console.log(user)
      res.send(user.games)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.get('/userFriends/:id', (req, res) => {
+  console.log()
+  // Look up the user by their email
+  db.User.findOne({username: req.params.id})
+  .then(user => {
+     console.log(user.friends)
+     res.send(user.friends)
+     
   })
   .catch(err => {
     console.log(err)

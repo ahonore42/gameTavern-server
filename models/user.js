@@ -87,6 +87,7 @@ let userSchema = new mongoose.Schema({
         default: false
     },
     games: Array,
+    friends: Array,
     tags: tagsSchema,
     creator: creatorSchema
 })
@@ -107,6 +108,7 @@ userSchema.set('toJSON', {
         delete user.password
         delete user.__v
         delete user.games
+        delete user.friends
         return user
     }
 })
