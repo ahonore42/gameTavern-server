@@ -182,6 +182,20 @@ router.post('/signup', (req, res) => {
   })
 })
 
+router.put('/edit', (req, res) => {
+  console.log(req.body)
+  // Look up the user by their email
+  db.User.findOne({ email: req.body.email })
+  .then(user => {
+    console.log(req.body.name)
+   user.push(req.body)
+   user.save()
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
 
 
 module.exports = router

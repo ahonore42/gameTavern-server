@@ -1,6 +1,9 @@
 {
   "name": "mern-auth-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "v13.10.1"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
